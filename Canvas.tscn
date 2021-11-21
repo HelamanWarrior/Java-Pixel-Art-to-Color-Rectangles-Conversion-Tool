@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Canvas.gd" type="Script" id=2]
+[ext_resource path="res://MouseCollision.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CanvasBorder.png" type="Texture" id=4]
+
+[node name="Canvas" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="MouseCollision" parent="." instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Control"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 96.0
+margin_bottom = 36.0
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasDisplay" type="NinePatchRect" parent="CanvasLayer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -152.0
+margin_top = -152.0
+margin_right = 168.0
+margin_bottom = 168.0
+texture = ExtResource( 4 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MousePosition" type="Label" parent="CanvasLayer/Control"]
+anchor_left = 0.00976562
+anchor_top = 0.984375
+anchor_right = 0.00976562
+anchor_bottom = 0.984375
+margin_top = -14.0
+margin_right = 1137.0
+text = "(0, 0)"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GeneratedCode" type="RichTextLabel" parent="CanvasLayer/Control"]
+margin_left = 32.0
+margin_top = 128.0
+margin_right = 336.0
+margin_bottom = 464.0
+focus_mode = 2
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/GeneratedCode"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="CopyCode" type="Button" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = -112.0
+margin_right = 224.0
+margin_bottom = -80.0
+text = "Copy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 704.0
+margin_top = 128.0
+margin_right = 1008.0
+margin_bottom = 464.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="color_changed" from="CanvasLayer/Control/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="pressed" from="CanvasLayer/Control/CopyCode" to="." method="_on_CopyCode_pressed"]

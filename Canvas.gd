@@ -64,7 +64,8 @@ func _process(_delta):
 		
 		if Global.generated_code_text.find(line) == -1:
 			Global.generated_code_text.append(line)
-		generated_code.text = str(optimize_the_code()).replace("[", "").replace("]", "").replace(";, ", ";\n")
+		
+		update_the_code()
 	
 	if Input.is_action_pressed("right_click") and is_instance_valid(pixel_hover):
 		var line = get_drawing_rectangle_code(pixel_hover.canvas_rel_pos)
@@ -76,11 +77,12 @@ func _process(_delta):
 		Global.pixel_array[Global.canvas_rel_mouse_pos.x + (Global.canvas_rel_mouse_pos.y * Global.local_canvas_size.x)] = 0
 		Global.pixel_instance_array[Global.canvas_rel_mouse_pos.x + (Global.canvas_rel_mouse_pos.y * Global.local_canvas_size.x)] = null
 		
-		generated_code.text = str(optimize_the_code()).replace("[", "").replace("]", "").replace(";, ", ";\n")
-		
-		print(optimize_the_code())
+		update_the_code()
 	
 	mouse_position_label.text = str(Global.canvas_rel_mouse_pos)
+
+func update_the_code():
+	generated_code.text = str(optimize_the_code()).replace("[", "").replace("]", "").replace(";, ", ";\n")
 
 func optimize_the_code():
 	#Get pixel positions
@@ -123,7 +125,6 @@ func optimize_the_code():
 			
 			empty_pixel = true
 		i += 1
-	print(rect_end_locations)
 	
 	#Generate output code for rectangles
 	var code = []
@@ -144,6 +145,11 @@ func _on_ColorPickerButton_color_changed(color):
 
 func _on_CopyCode_pressed():
 	OS.set_clipboard(generated_code.text)
+
+func _on_JavaPixelScale_value_changed(value):
+	Global.java_pixel_scale = Vector2(value, value)
+	print(value)
+	update_the_code()
 
 func _exit_tree():
 	Global.canvas = null

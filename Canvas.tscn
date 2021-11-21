@@ -89,6 +89,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="JavaPixelScale" type="HBoxContainer" parent="CanvasLayer/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 98.0
+margin_right = 28.0
+margin_bottom = 122.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/JavaPixelScale"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Java Pixel Scale:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Control/JavaPixelScale"]
+margin_left = 104.0
+margin_right = 178.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 64.0
+value = 16.0
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = 704.0
 margin_top = 128.0
@@ -100,3 +128,4 @@ __meta__ = {
 
 [connection signal="color_changed" from="CanvasLayer/Control/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="pressed" from="CanvasLayer/Control/CopyCode" to="." method="_on_CopyCode_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Control/JavaPixelScale/SpinBox" to="." method="_on_JavaPixelScale_value_changed"]
